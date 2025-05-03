@@ -1,0 +1,16 @@
+name: "Data driven API tests"
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: 
+      image: postman/newman
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run API Tests
+        run: newman run "Data-driven-test.postman_collection.json" --insecure -d data-tests.csv
+
+        
